@@ -270,6 +270,7 @@ bool bunnyhoptoggled = false;
 bool bunnyhopsmart = true;
 bool presskeyinroblox = false;
 bool unequipinroblox = false;
+bool gagBuySeed = false;
 
 // Section toggles and order
 constexpr int section_amounts = 14;
@@ -4265,4 +4266,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	exit(0);
 
 	return 0;
+
 }
