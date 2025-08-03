@@ -236,6 +236,7 @@ char ChatKeyChar[2] = "/";
 char CustomTextChar[256] = "";
 char RobloxFPSChar[256] = "60";
 char AntiAFKTimeChar[256] = "15";
+char seedRestockTimeChar[256] = "15";
 char PressKeyDelayChar[256] = "16";
 
 
@@ -300,6 +301,7 @@ int RobloxPixelValue = 716;
 int RobloxWallWalkValue = -94;
 int WallhopDelay = 17;
 int AntiAFKTime = 15;
+int seedRestockTime = 5;
 int display_scale = 100;
 int PressKeyDelay = 16;
 
@@ -1387,6 +1389,7 @@ const std::unordered_map<std::string, NumericVar> numeric_vars = {
 	{"PreviousSensValue", &PreviousSensValue},
 	{"windowOpacityPercent", &windowOpacityPercent},
 	{"AntiAFKTime", &AntiAFKTime},
+	{"SeedRestockTime", &seedRestockTime}
 	{"display_scale", &display_scale},
 };
 
@@ -1408,6 +1411,7 @@ const std::vector<std::pair<std::string, std::pair<char*, size_t>>> char_arrays 
     {"CustomTextChar", {CustomTextChar, sizeof(CustomTextChar)}},
 	{"RobloxFPSChar", {RobloxFPSChar, sizeof(RobloxFPSChar)}},
 	{"AntiAFKTimeChar", {AntiAFKTimeChar, sizeof(AntiAFKTimeChar)}},
+	{"SeedRestockTimeChar", {seedRestockTimehar, sizeof(seedReestockTimeChar)}}
 	{"WallhopDelayChar", {WallhopDelayChar, sizeof(WallhopDelayChar)}},
 	{"PressKeyDelayChar", {PressKeyDelayChar, sizeof(PressKeyDelayChar)}},
 
@@ -2570,6 +2574,7 @@ static void RunGUI()
 	SAFE_CONVERT_INT(vk_chatkey, ChatKeyChar);
 	SAFE_CONVERT_INT(RobloxFPS, RobloxFPSChar);
 	SAFE_CONVERT_INT(AntiAFKTime, AntiAFKTimeChar);
+	SAFE_CONVERT_INT(seedRestockTime, seedRestockTimeChar);
 	SAFE_CONVERT_INT(PressKeyDelay, PressKeyDelayChar);
 
 	SAFE_CONVERT_DOUBLE(BunnyHopDelay, BunnyHopDelayChar);
@@ -2712,6 +2717,14 @@ static void RunGUI()
 			ImGui::SameLine();
 			ImGui::SetNextItemWidth(30.0f);
 			if (ImGui::InputText("##AntiAFKTime", AntiAFKTimeChar, sizeof(AntiAFKTimeChar), ImGuiInputTextFlags_CharsDecimal | ImGuiInputTextFlags_CharsNoBlank)) {
+				try {
+					AntiAFKTime = std::stoi(AntiAFKTimeChar);
+				} catch (const std::invalid_argument &e) {
+				} catch (const std::out_of_range &e) {
+				}
+			}
+
+			if (ImGui::InputText("##SeedRestockTime", SeedRestockTimeChar, sizeof(SeedRestockTimeChar), ImGuiInputTextFlags_CharsDecimal | ImGuiInputTextFlags_CharsNoBlank)) {
 				try {
 					AntiAFKTime = std::stoi(AntiAFKTimeChar);
 				} catch (const std::invalid_argument &e) {
@@ -4268,3 +4281,4 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 
 }
+
